@@ -11,6 +11,25 @@ class OnboardingViewController: UIViewController {
     let stackView = UIStackView()
     let label = UILabel()
     let imageView = UIImageView()
+    let imageName: String
+    let bankeyTitle: String
+    
+    init(imageName: String, bankeyTitle: String) {
+        self.imageName = imageName
+        self.bankeyTitle = bankeyTitle
+        
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+   
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +49,7 @@ extension OnboardingViewController {
         // image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "delorean")
+        imageView.image = UIImage(named: imageName)
         
         
             
@@ -41,7 +60,7 @@ extension OnboardingViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
-        label.text = "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989."
+        label.text = bankeyTitle
     }
     
     func layout() {

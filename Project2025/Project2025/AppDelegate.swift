@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBrown
-        window?.rootViewController = LoginViewController()
-     // window?.rootViewController = MultiplePagesContainerViewController()
-     // window?.rootViewController = OnboardingViewController()
+     // window?.rootViewController = LoginViewController()
+      // window?.rootViewController = MultiplePagesContainerViewController()
+      window?.rootViewController = OnboardingViewController()
         
         
         return true

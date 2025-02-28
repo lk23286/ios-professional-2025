@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let loginView = LoginView()
+    let loginView = onboardingViewContainer()
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         style()
-        outlet()
+        layout()
     }
 }
 
@@ -48,7 +48,7 @@ extension ViewController {
         
     }
     
-    func outlet() {
+    func layout() {
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)

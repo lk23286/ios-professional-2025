@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LoginView: UIView {
+class onboardingViewContainer: UIView {
     
     let usernameTextField = UITextField()
     let passwordTextField = UITextField()
@@ -28,7 +28,7 @@ class LoginView: UIView {
 
 }
 
-extension LoginView:UITextFieldDelegate {
+extension onboardingViewContainer:UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         usernameTextField.endEditing(true)

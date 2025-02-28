@@ -40,7 +40,7 @@ class OnboardingViewContainer: UIViewController {
 extension OnboardingViewContainer {
     
     func style() {
-        
+        view.backgroundColor = .systemBackground
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical

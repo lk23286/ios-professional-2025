@@ -1,19 +1,16 @@
 //
 //  LoginView.swift
-//  Bankey
+//  Project2025-2
 //
-//  Created by Laszlo Kovacs on 2025. 01. 25..
+//  Created by Laszlo Kovacs on 2025. 02. 07..
 //
 
 import Foundation
 import UIKit
 
-
-
 class LoginView: UIView {
     
-    
-    let usernameTextFiled = UITextField()
+    let usernameTextField = UITextField()
     let passwordTextField = UITextField()
     let stackView = UIStackView()
     let dividerView = UIView()
@@ -31,40 +28,51 @@ class LoginView: UIView {
 
 }
 
-extension LoginView {
+extension LoginView:UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        usernameTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    }
     
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .secondarySystemBackground
-        
-        usernameTextFiled.translatesAutoresizingMaskIntoConstraints = false
-        usernameTextFiled.placeholder = "username"
-        usernameTextFiled.delegate = self
-        
+        backgroundColor = .systemGray5
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.placeholder = "Username"
+        usernameTextField.delegate = self
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.placeholder = "password"
-        passwordTextField.isSecureTextEntry = true
+        passwordTextField.placeholder = "Password"
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 8
         
         dividerView.translatesAutoresizingMaskIntoConstraints = false
-        dividerView.backgroundColor = .secondarySystemFill
+        dividerView.backgroundColor = .systemGray4
         
         layer.cornerRadius = 5
-        clipsToBounds = true
         
     }
     
     func layout() {
-        
-        stackView.addArrangedSubview(usernameTextFiled)
+        stackView.addArrangedSubview(usernameTextField)
         stackView.addArrangedSubview(dividerView)
         stackView.addArrangedSubview(passwordTextField)
+        
         addSubview(stackView)
+
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
@@ -73,30 +81,5 @@ extension LoginView {
             bottomAnchor.constraint(equalToSystemSpacingBelow: stackView.bottomAnchor, multiplier: 1),
             dividerView.heightAnchor.constraint(equalToConstant: 1)
         ])
-        
-       // dividerView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-
-}
-
-extension LoginView: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        usernameTextFiled.endEditing(true)
-        passwordTextField.endEditing(true)
-
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != "" {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
     }
 }

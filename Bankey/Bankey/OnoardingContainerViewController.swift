@@ -12,10 +12,8 @@ class OnboardingContainerViewController: UIViewController {
 
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController {
-        didSet {
-        }
-    }
+    var currentVC: UIViewController
+    let closeButton = UIButton(type: .system)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -23,12 +21,10 @@ class OnboardingContainerViewController: UIViewController {
         let page1 = OnboardingViewController(imageName: "delorean", bankeyTitle: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
         let page2 = OnboardingViewController(imageName: "thumbs", bankeyTitle: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
         let page3 = OnboardingViewController(imageName: "world", bankeyTitle: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
-        let page4 = OnboardingViewController(imageName: "arrowInCircle", bankeyTitle: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
         
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
-        pages.append(page4)
         
         currentVC = pages.first!
         
@@ -42,26 +38,50 @@ class OnboardingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemPurple
+        setup()
+        style()
+        layout()
+}
+    
+private func setup() {
+    view.backgroundColor = .systemPurple
+    
+    addChild(pageViewController)
+    view.addSubview(pageViewController.view)
+    pageViewController.didMove(toParent: self)
+    
+    pageViewController.dataSource = self
+    pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+        view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
+        view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
+        view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
+        view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
+    ])
+    
+    pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
+    currentVC = pages.first!
+}
+    
+    private func style() {
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("close", for: [])
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
         
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        pageViewController.didMove(toParent: self)
-        
-        pageViewController.dataSource = self
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addSubview(closeButton)
+    }
+
+    private func layout() {
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
-            view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier:  2),
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
         ])
-        
-        pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
-        currentVC = pages.first!
     }
 }
+
+
+
 
 // MARK: - UIPageViewControllerDataSource
 extension OnboardingContainerViewController: UIPageViewControllerDataSource {
@@ -95,4 +115,9 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
-
+// MARK: - Action
+extension OnboardingContainerViewController {
+    @objc func closeTapped(_ sender: UIButton) {
+        // TODO
+    }
+}

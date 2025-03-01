@@ -8,12 +8,15 @@
 import Foundation
 import UIKit
 
-class onboardingViewContainer: UIView {
+class LoginView: UIView {
+    
     
     let usernameTextField = UITextField()
     let passwordTextField = UITextField()
     let stackView = UIStackView()
     let dividerView = UIView()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +31,7 @@ class onboardingViewContainer: UIView {
 
 }
 
-extension onboardingViewContainer:UITextFieldDelegate {
+extension LoginView:UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         usernameTextField.endEditing(true)
@@ -46,6 +49,9 @@ extension onboardingViewContainer:UITextFieldDelegate {
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .systemGray5
+        
+
+        
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.placeholder = "Username"
         usernameTextField.delegate = self
@@ -67,12 +73,13 @@ extension onboardingViewContainer:UITextFieldDelegate {
     }
     
     func layout() {
+        
+
         stackView.addArrangedSubview(usernameTextField)
         stackView.addArrangedSubview(dividerView)
         stackView.addArrangedSubview(passwordTextField)
         
         addSubview(stackView)
-
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),

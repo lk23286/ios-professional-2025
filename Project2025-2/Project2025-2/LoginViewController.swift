@@ -9,7 +9,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    let loginView = onboardingViewContainer()
+    
+    let firstTextLabel = UILabel()
+    let secondTextLabel = UILabel()
+    let loginView = LoginView()
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
     
@@ -34,6 +37,18 @@ extension LoginViewController {
     func style() {
         loginView.translatesAutoresizingMaskIntoConstraints = false
         
+        firstTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        firstTextLabel.text = "Bankey"
+        firstTextLabel.textAlignment = .center
+        firstTextLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        
+        secondTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        secondTextLabel.text = "Your premier source of all things Banking!"
+        secondTextLabel.textAlignment = .center
+        secondTextLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        secondTextLabel.numberOfLines = 0
+        
+        
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
         signInButton.configuration?.imagePadding = 8
@@ -49,9 +64,25 @@ extension LoginViewController {
     }
     
     func layout() {
+        view.addSubview(firstTextLabel)
+        view.addSubview(secondTextLabel)
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)
+        
+        //First view layout
+        NSLayoutConstraint.activate([
+            firstTextLabel.bottomAnchor.constraint(equalTo: secondTextLabel.topAnchor, constant: -28),
+            firstTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: firstTextLabel.trailingAnchor)
+            ])
+        
+        // Second view layout
+        NSLayoutConstraint.activate([
+            secondTextLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -28),
+            secondTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: secondTextLabel.trailingAnchor)
+            ])
         
         // login view layout
         NSLayoutConstraint.activate([

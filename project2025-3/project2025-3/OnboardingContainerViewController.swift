@@ -1,13 +1,14 @@
 //
-//  MultiplePagesViewContainer.swift
-//  Project2025-2
+//  OnboardingContainerViewController.swift
+//  project2025-3
 //
-//  Created by Laszlo Kovacs on 2025. 02. 28..
+//  Created by Laszlo Kovacs on 2025. 03. 01..
 //
+
 
 import UIKit
 
-class MultiplePagesContainerViewController: UIViewController {
+class OnboardingContainerViewController: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
@@ -19,15 +20,13 @@ class MultiplePagesContainerViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewContainer(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
-        let page2 = OnboardingViewContainer(heroImageName: "world", titleText: "Move your money around the world quickly and easily.")
-        let page3 = OnboardingViewContainer(heroImageName: "thumbs", titleText: "Learn more at www.banky.com")
-        
+        let page1 = OnboardingViewController(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
+        let page2 = OnboardingViewController(heroImageName: "world", titleText: "Move your money around the world quickly and easily.")
+        let page3 = OnboardingViewController(heroImageName: "thumbs", titleText: "Learn more at www.banky.com")
         
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
-        
         
         currentVC = pages.first!
         
@@ -63,7 +62,7 @@ class MultiplePagesContainerViewController: UIViewController {
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension MultiplePagesContainerViewController: UIPageViewControllerDataSource {
+extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return getPreviousViewController(from: viewController)
@@ -93,7 +92,6 @@ extension MultiplePagesContainerViewController: UIPageViewControllerDataSource {
         return pages.firstIndex(of: self.currentVC) ?? 0
     }
 }
-
 
 
 

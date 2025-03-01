@@ -26,11 +26,8 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         style()
-        
-        overview()
+        layout()
     }
-
-
 }
 
 extension LoginViewController {
@@ -46,11 +43,11 @@ extension LoginViewController {
         errorMessageLabel.textColor = .red
         errorMessageLabel.textAlignment = .center
         errorMessageLabel.text = "Error message"
-        errorMessageLabel.isHidden = false
+        errorMessageLabel.isHidden = true
         
     }
     
-    func overview() {
+    func layout() {
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)
@@ -89,10 +86,13 @@ extension LoginViewController {
         }
         if username.isEmpty || password.isEmpty {
             configureView(withMessage: "Please fill in all fields")
+            return
         }
         
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
+        } else {
+            configureView(withMessage: "Invalid username or password")
         }
         
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     let loginView = onboardingViewContainer()
     let signInButton = UIButton()
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension LoginViewController {
     func style() {
         loginView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -76,7 +76,7 @@ extension ViewController {
     
 }
 
-extension ViewController {
+extension LoginViewController {
     @objc func signInTapped() {
         errorMessageLabel.isHidden = true
         login()

@@ -43,6 +43,7 @@ extension LoginViewController {
         firstTextLabel.font = .systemFont(ofSize: 32, weight: .bold)
         firstTextLabel.textAlignment = .center
         
+        
         secondTextLabel.translatesAutoresizingMaskIntoConstraints = false
         secondTextLabel.text = "Your premier source of all things Banking!"
         secondTextLabel.font = .systemFont(ofSize: 24, weight: .bold)

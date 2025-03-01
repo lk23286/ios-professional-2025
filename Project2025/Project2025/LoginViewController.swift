@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     let signInButton = UIButton(type: .system)
     let errorMessageLable = UILabel()
     
+    
     var username: String? {
         return loginView.usernameTextFied.text
     }
@@ -80,7 +81,6 @@ extension LoginViewController {
             firstLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: firstLabel.trailingAnchor, multiplier: 1)
             ])
-        
         
         
         // second label layout

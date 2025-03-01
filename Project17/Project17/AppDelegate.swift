@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Project2025-2
+//  Project17
 //
-//  Created by Laszlo Kovacs on 2025. 02. 05..
+//  Created by Laszlo Kovacs on 2025. 03. 01..
 //
 
 import UIKit
@@ -17,13 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.backgroundColor = .systemBackground
+        window?.backgroundColor = .orange
         window?.rootViewController = LoginViewController()
-       // window?.rootViewController = OnboardingContainerViewController()
-       // window?.rootViewController = OnboardingViewContainer(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
         
         return true
     }
+
 
 }
 

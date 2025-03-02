@@ -9,6 +9,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    
+    let firstTextLabel = UILabel()
+    let secondTextLabel = UILabel()
     let loginView = LoginView()
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
@@ -32,33 +35,60 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     
     func style() {
-        view.backgroundColor = .systemMint
+        view.backgroundColor = .systemBackground
+        
+        firstTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        firstTextLabel.textAlignment = .center
+        firstTextLabel.font = .systemFont(ofSize: 36, weight: .bold)
+        firstTextLabel.text = "Bankey"
+        
+        secondTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        secondTextLabel.textAlignment = .center
+        secondTextLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        secondTextLabel.text = "Your premier source of all things Banking!"
+        secondTextLabel.numberOfLines = 0
+        
+        
+
         
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
         signInButton.configuration?.imagePadding = 8
         signInButton.setTitle("Sign in", for: [])
         signInButton.addTarget(self, action: #selector(SignInTouched), for: .primaryActionTriggered)
-        // Modern configuration for button appearance (iOS 15+)
-        var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = .systemGray // Set button background color
-        config.baseForegroundColor = .white       // Set text color
-        signInButton.configuration = config
-        self.view.addSubview(signInButton)
+      
         
         errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         errorMessageLabel.textAlignment = .center
         errorMessageLabel.numberOfLines = 0
         errorMessageLabel.textColor = .red
         errorMessageLabel.text = "Error message placeholder"
-        errorMessageLabel.isHidden = false
+        errorMessageLabel.isHidden = true
     }
     
     func layout() {
+        view.addSubview(firstTextLabel)
+        view.addSubview(secondTextLabel)
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)
         
+        
+        // FirstText layout
+        NSLayoutConstraint.activate([
+            firstTextLabel.bottomAnchor.constraint(equalTo: secondTextLabel.topAnchor, constant: -24),
+            firstTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: firstTextLabel.trailingAnchor, multiplier: 1)
+        ])
+        
+        
+        //SecondText layout
+        NSLayoutConstraint.activate([
+            secondTextLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -24),
+            secondTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: secondTextLabel.trailingAnchor, multiplier: 1)
+            ])
+            
        
         // login view layout
         NSLayoutConstraint.activate([
@@ -101,6 +131,7 @@ extension LoginViewController {
         
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
+            errorMessageLabel.isHidden = true
         } else {
             configurationView(withMessage: "Invalid username or password")
         }

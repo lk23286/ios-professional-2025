@@ -48,30 +48,15 @@ extension LoginView: UITextFieldDelegate {
     
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemGray
+        backgroundColor = .secondarySystemBackground
         
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
-        //usernameTextField.placeholder = "Username"
+        usernameTextField.placeholder = "Username"
         usernameTextField.delegate = self
-        // Change placeholder text color
-        var placeholderText = "Enter username"
-        let placeholderColor = UIColor.systemGray2 // Change to any color you want
-        usernameTextField.attributedPlaceholder = NSAttributedString(
-            string: placeholderText,
-            attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
-        )
-        usernameTextField.textColor = .white
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        //passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = "Password"
         passwordTextField.delegate = self
-        // Change placeholder text color
-         placeholderText = "Enter password"
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: placeholderText,
-            attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
-        )
-        passwordTextField.textColor = .white
         passwordTextField.isSecureTextEntry = true
         
         stackView.translatesAutoresizingMaskIntoConstraints = false

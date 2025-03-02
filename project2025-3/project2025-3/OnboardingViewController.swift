@@ -18,6 +18,7 @@ class OnboardingViewController: UIViewController {
     let stackView = UIStackView()
     let label = UILabel()
     let imageView = UIImageView()
+    let closedButton = UIButton()
     
     var heroImageName: String!
     var titleText: String!

@@ -8,14 +8,13 @@
 
 import UIKit
 
-class MultiplePagesContainerViewController: UIViewController {
+class OnboardingContainerViewController: UIViewController {
 
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController {
-        didSet {
-        }
-    }
+    var currentVC: UIViewController
+    var closedButton = UIButton(type: .system)
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -40,8 +39,15 @@ class MultiplePagesContainerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        setup()
+        style()
+        layout()
+        
+      //  super.viewDidLoad()
+    }
+    
+    private func setup() {
         view.backgroundColor = .systemPurple
         
         addChild(pageViewController)
@@ -61,10 +67,29 @@ class MultiplePagesContainerViewController: UIViewController {
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
     }
+    
+    private func style() {
+        
+        closedButton.translatesAutoresizingMaskIntoConstraints = false
+        closedButton.setTitle("Close", for: [])
+        closedButton.addTarget(self, action: #selector(closedTapped), for: .primaryActionTriggered)
+    
+        
+    }
+    
+    private func layout() {
+        
+        view.addSubview(closedButton)
+        // close
+        NSLayoutConstraint.activate([
+            closedButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            closedButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+        ])
+    }
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension MultiplePagesContainerViewController: UIPageViewControllerDataSource {
+extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return getPreviousViewController(from: viewController)
@@ -95,5 +120,12 @@ extension MultiplePagesContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: - Action
+extension OnboardingContainerViewController {
+    
+    @objc func closedTapped(_ sender: UIButton) {
+       // TODO
+    }
+}
 
     

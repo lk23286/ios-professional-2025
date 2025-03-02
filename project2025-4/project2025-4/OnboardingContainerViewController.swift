@@ -11,10 +11,8 @@ class OnboardingContainerViewController: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController {
-        didSet {
-        }
-    }
+    var currentVC: UIViewController
+    let closeButton = UIButton(type: .system)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -39,6 +37,13 @@ class OnboardingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
+        style()
+        layout()
+
+    }
+    func setup()
+    {
         view.backgroundColor = .systemPurple
         
         addChild(pageViewController)
@@ -57,6 +62,19 @@ class OnboardingContainerViewController: UIViewController {
         
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
+    }
+    func style() {
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("close", for: .normal)
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+    }
+    func layout() {
+        view.addSubview(closeButton)
+        
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2)
+        ])
     }
 }
 
@@ -92,6 +110,12 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
+//MARK:- Action
+extension OnboardingContainerViewController {
+    @objc func closeTapped() {
+        //TODO
+    }
+}
 
 
 

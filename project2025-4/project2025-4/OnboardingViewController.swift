@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class OnboardingViewController: UIViewController {
     
     let stackView = UIStackView()
@@ -16,7 +17,6 @@ class OnboardingViewController: UIViewController {
     
     let heroImageName: String
     let titleText: String
-    
     
     init(heroImageName: String, titleText: String) {
         self.heroImageName = heroImageName

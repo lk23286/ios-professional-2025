@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func  login()
+}
+
 class LoginViewController: UIViewController {
     
     
@@ -15,6 +19,8 @@ class LoginViewController: UIViewController {
     let loginView = LoginView()
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     var username: String? {
         return loginView.usernameTextField.text
@@ -48,16 +54,12 @@ extension LoginViewController {
         secondTextLabel.text = "Your premier source of all things Banking!"
         secondTextLabel.numberOfLines = 0
         
-        
-
-        
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
         signInButton.configuration?.imagePadding = 8
         signInButton.setTitle("Sign in", for: [])
         signInButton.addTarget(self, action: #selector(SignInTouched), for: .primaryActionTriggered)
       
-        
         errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         errorMessageLabel.textAlignment = .center
         errorMessageLabel.numberOfLines = 0
@@ -81,7 +83,6 @@ extension LoginViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: firstTextLabel.trailingAnchor, multiplier: 1)
         ])
         
-        
         //SecondText layout
         NSLayoutConstraint.activate([
             secondTextLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -24),
@@ -89,7 +90,6 @@ extension LoginViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: secondTextLabel.trailingAnchor, multiplier: 1)
             ])
             
-       
         // login view layout
         NSLayoutConstraint.activate([
             loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -132,6 +132,7 @@ extension LoginViewController {
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
             errorMessageLabel.isHidden = true
+            delegate?.login()
         } else {
             configurationView(withMessage: "Invalid username or password")
         }

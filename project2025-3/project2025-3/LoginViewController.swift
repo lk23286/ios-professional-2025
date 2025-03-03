@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func login()
+}
+
 class LoginViewController: UIViewController {
     
     let firstTextLabel = UILabel()
@@ -15,6 +19,8 @@ class LoginViewController: UIViewController {
     let loginView = LoginView()
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     var username: String? {
         return loginView.usernameTextField.text
@@ -37,7 +43,6 @@ extension LoginViewController {
     
     func style() {
         
-        
         firstTextLabel.translatesAutoresizingMaskIntoConstraints = false
         firstTextLabel.text = "Bankey"
         firstTextLabel.textAlignment = .center
@@ -48,8 +53,6 @@ extension LoginViewController {
         secondTextLabel.textAlignment = .center
         secondTextLabel.font = .systemFont(ofSize: 24)
         secondTextLabel.numberOfLines = 0
-        
-    
         
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
@@ -126,6 +129,7 @@ extension LoginViewController {
         
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
+            delegate?.login()
         } else {
             configureView(withMessage: "Invalid username or password")
         }

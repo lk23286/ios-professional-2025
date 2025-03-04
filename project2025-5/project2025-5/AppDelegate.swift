@@ -10,6 +10,8 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let loginViewController = LoginViewController()
+    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -17,11 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .orange
-        window?.rootViewController = LoginViewController()
+        window?.rootViewController = loginViewController
         
+        loginViewController.delegate = self
+        
+     //   window?.rootViewController = OnboardingViewContainer(heroImageName: "world", titleText: "hah")
+     //   window?.rootViewController = OnboardingContainerViewController()
         return true
     }
-
-
 }
 
+extension AppDelegate: LoginViewControllerDelegate {
+    func login() {
+        print("Do Login")
+    }
+}

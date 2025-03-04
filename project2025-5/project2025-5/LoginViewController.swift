@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func login()
+}
+
 class LoginViewController: UIViewController {
     
     let firstTextLabel = UILabel()
@@ -14,6 +18,8 @@ class LoginViewController: UIViewController {
     let loginView = LoginView()
     let signInButton = UIButton()
     let erroMessageLabel = UILabel()
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     var username: String? {
         return loginView.usernameTextField.text
@@ -38,13 +44,15 @@ extension LoginViewController {
         view.backgroundColor = .systemBackground
         
         firstTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        firstTextLabel.text = "First name"
+        firstTextLabel.text = "Bankey"
         firstTextLabel.textAlignment = .center
+        firstTextLabel.font = .systemFont(ofSize: 36, weight: .bold)
         
         secondTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        secondTextLabel.text = "Second name"
+        secondTextLabel.text = "Your premier source of all things Banking!"
         secondTextLabel.textAlignment = .center
         secondTextLabel.numberOfLines = 0
+        secondTextLabel.font = .systemFont(ofSize: 24 )
         
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
@@ -70,24 +78,23 @@ extension LoginViewController {
         
         //first
         NSLayoutConstraint.activate([
-            firstTextLabel.topAnchor.constraint(equalTo: secondTextLabel.topAnchor, constant: -24),
+            firstTextLabel.bottomAnchor.constraint(equalTo: secondTextLabel.topAnchor, constant: -24),
             firstTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.leadingAnchor.constraint(equalToSystemSpacingAfter: firstTextLabel.trailingAnchor, multiplier: 1)
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: firstTextLabel.trailingAnchor, multiplier: 1)
         ])
         
         // second
         NSLayoutConstraint.activate([
             secondTextLabel.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: -24),
             secondTextLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.leadingAnchor.constraint(equalToSystemSpacingAfter: secondTextLabel.trailingAnchor, multiplier: 1)
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: secondTextLabel.trailingAnchor, multiplier: 1)
             ])
        
         // loginView
         NSLayoutConstraint.activate([
-            loginView.centerYAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 1),
+            loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             loginView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: loginView.trailingAnchor, multiplier: 1)
-            
         ])
        
         //Sign in button
@@ -127,6 +134,7 @@ extension LoginViewController {
         
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
+            delegate?.login()
         } else {
             configurationView(withMessage: "Username or password is incorrect")
         }

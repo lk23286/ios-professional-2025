@@ -43,7 +43,8 @@ extension LoginView: UITextFieldDelegate {
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
-        passwordTextField.delegate = self
+        passwordTextField.delegate = self                    
+        passwordTextField.isSecureTextEntry = true
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical

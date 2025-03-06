@@ -12,8 +12,20 @@ class OnboardingContainerViewController: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController
+    
+    var currentVC: UIViewController {
+        didSet {
+            guard let index = pages.firstIndex(of: currentVC) else { return }
+            backButton.isHidden = index == 0 // 0
+            nextButton.isHidden = index == pages.count - 1
+            doneButton.isHidden = index != pages.count - 1 //
+        }
+    }
+    
     let closeButton = UIButton(type: .system)
+    let backButton = UIButton(type: .system)
+    let nextButton = UIButton(type: .system)
+    let doneButton = UIButton(type: .system)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -75,13 +87,46 @@ class OnboardingContainerViewController: UIViewController {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setTitle("Close", for: [])
         closeButton.addTarget(self, action: #selector(closedTouched), for: .primaryActionTriggered)
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.setTitle("Back", for: [])
+        backButton.addTarget(self, action: #selector(backTouched), for: .primaryActionTriggered)
+        
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.setTitle("Next", for: [])
+        nextButton.addTarget(self, action: #selector(nextTouched), for: .primaryActionTriggered)
+        
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle("Done", for: [])
+        doneButton.addTarget(self, action: #selector(doneTouched), for: .primaryActionTriggered)
     }
     func layout() {
         view.addSubview(closeButton)
+        view.addSubview(backButton)
+        view.addSubview(nextButton)
+        view.addSubview(doneButton)
         
+        // Close
         NSLayoutConstraint.activate([
             closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+        ])
+        
+        //Back
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: backButton.bottomAnchor, multiplier: 8)
+            ])
+        //Done
+        NSLayoutConstraint.activate([
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: doneButton.trailingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: doneButton.bottomAnchor, multiplier: 8)
+            ])
+        
+        //Next
+        NSLayoutConstraint.activate([
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: nextButton.bottomAnchor, multiplier: 8)
         ])
     }
 }
@@ -123,6 +168,19 @@ extension OnboardingContainerViewController {
     @objc func closedTouched() {
       //TODO
     }
+    
+    @objc func backTouched() {
+        
+    }
+    
+    @objc func nextTouched() {
+        
+    }
+    
+    @objc func doneTouched() {
+        
+    }
+
 }
 
 

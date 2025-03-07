@@ -177,18 +177,24 @@ extension OnboardingContainerViewController {
     @objc func closedTapped(_ sender: UIButton) {
         // TODO
         delegate?.didFinishOnboarding()
+        let index = pages.firstIndex(of: currentVC)
+        print("foo- close index: \(String(describing: index))")
     }
     
     @objc func doneTapped(_ sender: UIButton) {
         delegate?.didFinishOnboarding()
+        let index = pages.firstIndex(of: currentVC)
+        print("foo- done index: \(String(describing: index))")
     }
     
     @objc func backTapped(_ sender: UIButton) {
-        delegate?.didFinishOnboarding()
+        let index = pages.firstIndex(of: currentVC)
+        print("foo- back index: \(String(describing: index))")
     }
     
     @objc func nextTapped(_ sender: UIButton) {
-        delegate?.didFinishOnboarding()
+        let index = pages.firstIndex(of: currentVC)
+        print("foo- next index: \(String(describing: index))")
     }
     
 }

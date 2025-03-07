@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
+
 protocol LoginViewControllerDelegate: AnyObject {
     func didLogin()
 }
+
+
 
 class LoginViewController: UIViewController {
     
@@ -34,9 +40,12 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         style()
         layout()
-        
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        signInButton.configuration?.showsActivityIndicator = false
+    }
 }
 
 extension LoginViewController {
@@ -145,7 +154,6 @@ extension LoginViewController {
         } else {
             configureView(withMessage: "Incorrect username / password")
         }
-        
     }
     
     private func configureView(withMessage message: String) {

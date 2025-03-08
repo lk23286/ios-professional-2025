@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol OnboardingContainerViewControllerDelegate: AnyObject {
+    func didFinishOnbouarding()
+}
+
 class OnboardingContainerViewController: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
+    
+    weak var delegate: OnboardingContainerViewControllerDelegate?
     
     var currentVC: UIViewController {
         didSet {
@@ -167,6 +173,8 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 extension OnboardingContainerViewController {
     @objc func closedTouched() {
       //TODO
+       delegate?.didFinishOnbouarding()
+        print("didFinishOnbouarding")
     }
     
     @objc func backTouched() {

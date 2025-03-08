@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
+
 protocol LoginViewControllerDelegate: AnyObject {
     func login()
 }

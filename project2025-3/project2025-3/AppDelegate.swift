@@ -11,6 +11,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let loginViewController = LoginViewController()
+    let dummyViewController = DummyViewController()
+    let onbordingContainerViewController = OnboardingContainerViewController()
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -18,12 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-       // window?.rootViewController = loginViewController
+        window?.rootViewController = loginViewController
+        //window?.rootViewController = dummyViewController
         
         loginViewController.delegate = self
+        dummyViewController.delegate = self
+        onbordingContainerViewController.delegate = self
+  
         
         //window?.rootViewController = OnboardingViewController(heroImageName: "delorean", titleText: "Hello, World!")
-        window?.rootViewController = OnboardingContainerViewController()
+        //window?.rootViewController = OnboardingContainerViewController()
         return true
     }
 
@@ -31,8 +38,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate:LoginViewControllerDelegate{
     func login() {
         print("Do Login")
+        window?.rootViewController = onbordingContainerViewController
+    }
+}
+
+extension AppDelegate:LogoutDelegate{
+    func didLogout() {
+        window?.rootViewController = loginViewController
+        loginViewController.signInButton.configuration?.showsActivityIndicator = false 
     }
     
+}
+
+extension AppDelegate: OnboardingContainerViewControllerDelegate{
+    func didFinishOnbouarding() {
+        window?.rootViewController = dummyViewController
+    }
     
 }
 

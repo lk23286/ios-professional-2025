@@ -21,7 +21,7 @@ class OnboardingContainerViewController: UIViewController {
         didSet {
             guard let index = pages.firstIndex(of: currentVC) else { return }
             nextButton.isHidden = index == pages.count - 1 // hide if it is last one
-            doneButton.isHidden = index != pages.count - 1 // show it if it is not the last one
+            doneButton.isHidden = !(index == pages.count - 1) // show it if it is not the last one
             backButton.isHidden = index == 0
         }
     }

@@ -176,15 +176,15 @@ extension OnboardingContainerViewController {
     }
     
     @objc func backTapped(_ sender: UIButton) {
-        delegate?.didFinishOnboarding()
+        
     }
     
     @objc func nextTapped(_ sender: UIButton) {
-        delegate?.didFinishOnboarding()
+        
     }
     
     @objc func doneTapped(_ sender: UIButton) {
-        delegate?.didFinishOnboarding()
+        
     }
     
 }

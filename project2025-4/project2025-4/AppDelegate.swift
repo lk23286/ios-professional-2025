@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     let loginViewController = LoginViewController()
+    let onboardingContainerViewController = OnboardingContainerViewController()
+    let dummyViewController = DummyViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -20,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .cyan
         window?.rootViewController = loginViewController
+        
         loginViewController.delegate = self
+        onboardingContainerViewController.delegate = self
+        dummyViewController.delegate = self
         
         // window?.rootViewController = OnboardingViewController(heroImageName: "delorean", titleText: "hello")
         //window?.rootViewController = OnboardingContainerViewController()
@@ -32,8 +37,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LoginViewControllerDelegate {
     func login() {
         print("Do login")
+        window?.rootViewController = onboardingContainerViewController
+    }
+}
+
+extension AppDelegate: OnboardingContainerViewControllerDelegate {
+    func didFinishOnboarding() {
+        print("Onboarding did finish")
+        window?.rootViewController = dummyViewController
+    }
+}
+
+extension AppDelegate: LogoutDelegate {
+    func didLogout() {
+        window?.rootViewController = loginViewController
+        loginViewController.signInButton.configuration?.showsActivityIndicator = false
     }
     
     
 }
-

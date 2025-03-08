@@ -11,6 +11,9 @@ class DummyViewController: UIViewController {
     
     let stackView = UIStackView()
     let label = UILabel()
+    let logoutButton = UIButton(type: .system)
+    
+    weak var delegate: LogoutDelegate?
 
     
     override func viewDidLoad() {
@@ -34,10 +37,16 @@ extension DummyViewController {
         label.text = "Hello, World!"
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.configuration = .filled()
+        logoutButton.setTitle("Logout", for: [])
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .primaryActionTriggered)
+        
     }
     
     func layout() {
         stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(logoutButton)
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -48,4 +57,12 @@ extension DummyViewController {
     }
 }
 
+extension DummyViewController {
+    @objc func logoutButtonTapped() {
+        //TODO
+        delegate?.didLogout()
+        
+    }
+
+}
 

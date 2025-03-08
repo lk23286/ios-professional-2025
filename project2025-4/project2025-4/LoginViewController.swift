@@ -129,7 +129,7 @@ extension LoginViewController {
             return 
         }
         
-        if username == "Kevin" && password == "Welcome" {
+        if username == "K" && password == "W" {
             signInButton.configuration?.showsActivityIndicator = true
             errorMessageLabel.isHidden = true
             delegate?.login()

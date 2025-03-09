@@ -5,21 +5,35 @@
 //  Created by Laszlo Kovacs on 2025. 03. 03..
 //
 
+
 import UIKit
+
+protocol OnboardingContainerViewControllerDelegate: AnyObject {
+    func didFinishOnboarding()
+}
+
+protocol logoutDelegate: AnyObject {
+    func logout()
+}
 
 class OnboardingContainerViewController: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
-    var currentVC: UIViewController
+    var currentVC: UIViewController {
+        didSet {
+        }
+    }
+    let closeButton = UIButton(type: .system)
+    weak var delegate: OnboardingContainerViewControllerDelegate?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewContainer(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
-        let page2 = OnboardingViewContainer(heroImageName: "world", titleText: "Move your money around the world quickly and easily.")
-        let page3 = OnboardingViewContainer(heroImageName: "thumbs", titleText: "Learn more at www.banky.com")
+        let page1 = OnboardingViewController(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
+        let page2 = OnboardingViewController(heroImageName: "world", titleText: "Move your money around the world quickly and easily.")
+        let page3 = OnboardingViewController(heroImageName: "thumbs", titleText: "Learn more at www.banky.com")
         
         
         pages.append(page1)
@@ -39,6 +53,13 @@ class OnboardingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
+        style()
+        layout()
+        
+    }
+    
+   private func setup() {
         view.backgroundColor = .systemPurple
         
         addChild(pageViewController)
@@ -58,6 +79,24 @@ class OnboardingContainerViewController: UIViewController {
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
     }
+    
+   private func style() {
+        
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        //closeButton.configuration = .filled()
+        closeButton.setTitle("Close", for: [])
+        closeButton.addTarget(self, action: #selector(closeTouched), for: .primaryActionTriggered)
+        
+    }
+    
+   private func layout() {
+       view.addSubview(closeButton)
+       
+       NSLayoutConstraint.activate([
+        closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
+        closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+       ])
+   }
 }
 
 // MARK: - UIPageViewControllerDataSource
@@ -92,7 +131,10 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
-
-
-
+extension OnboardingContainerViewController {
+    @objc func closeTouched() {
+        // TODO
+        delegate?.didFinishOnboarding()
+    }
+}
 

@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-class OnboardingViewContainer: UIViewController {
+class OnboardingViewController: UIViewController {
     
     let stackView = UIStackView()
     let imageView = UIImageView()
@@ -37,9 +37,10 @@ class OnboardingViewContainer: UIViewController {
     }
 }
 
-extension OnboardingViewContainer {
+extension OnboardingViewController {
     
     func style() {
+        
         view.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -57,8 +58,12 @@ extension OnboardingViewContainer {
     }
     
     func layout() {
+        
+        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(label)
+        
+        
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([

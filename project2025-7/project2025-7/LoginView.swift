@@ -7,12 +7,12 @@
 import Foundation
 import UIKit
 
-let usernameTextField = UITextField()
-let passwordTextField = UITextField()
-let stackView = UIStackView()
-let dividerView = UIView()
-
 class LoginView: UIView {
+    
+    let usernameTextField = UITextField()
+    let passwordTextField = UITextField()
+    let stackView = UIStackView()
+    let dividerView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +51,7 @@ extension LoginView: UITextFieldDelegate {
     
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemGreen
+        backgroundColor = .secondarySystemBackground
         
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.placeholder = "Username"
@@ -60,13 +60,16 @@ extension LoginView: UITextFieldDelegate {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 8
         
         dividerView.translatesAutoresizingMaskIntoConstraints = false
-        dividerView.backgroundColor = .systemYellow
+        dividerView.backgroundColor = .systemGray
+        
+        layer.cornerRadius = 8
         
     }
     

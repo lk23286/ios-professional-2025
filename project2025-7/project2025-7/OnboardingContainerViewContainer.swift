@@ -1,22 +1,18 @@
 //
-//  OnboardingContainerViewController.swift
-//  project2025-6
+//  OnboardingContainerViewContainer.swift
+//  project2025-7
 //
-//  Created by Laszlo Kovacs on 2025. 03. 09..
+//  Created by Laszlo Kovacs on 2025. 03. 11..
 //
 
 
 import UIKit
 
-protocol logoutDelegate: AnyObject {
-    func logout()
+protocol OnboardingContainerViewContainerDelegate: AnyObject {
+    func  didOnboardingFinish()
 }
 
-protocol OnboardingContainerViewControllerDelegate: AnyObject {
-    func didOnboardingFinish()
-}
-
-class OnboardingContainerViewController: UIViewController {
+class OnboardingContainerViewContainer: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
@@ -24,22 +20,20 @@ class OnboardingContainerViewController: UIViewController {
         didSet {
         }
     }
-    
     let closeButton = UIButton(type: .system)
     
-    weak var delegate: OnboardingContainerViewControllerDelegate?
+    weak var delegate: OnboardingContainerViewContainerDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewController(heroImageName: "delorean", textName: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
-        let page2 = OnboardingViewController(heroImageName: "world", textName: "Move your money around the world quickly and easily.")
-        let page3 = OnboardingViewController(heroImageName: "thumbs", textName: "Learn more at www.banky.com")
+        let page1 = OnboardingViewController(heroImageName: "delorean", heroText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
+        let page2 = OnboardingViewController(heroImageName: "world", heroText: "Move your money around the world quickly and easily.")
+        let page3 = OnboardingViewController(heroImageName: "thumbs", heroText: "Learn more at www.banky.com")
         
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
-        
         
         currentVC = pages.first!
         
@@ -51,18 +45,16 @@ class OnboardingContainerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         setup()
         style()
         layout()
         
+        super.viewDidLoad()
     }
-    
 }
 
-extension OnboardingContainerViewController {
-    
+extension OnboardingContainerViewContainer {
     func setup() {
         view.backgroundColor = .systemPurple
         
@@ -92,20 +84,17 @@ extension OnboardingContainerViewController {
     }
     
     func layout() {
-       
         view.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8)
         ])
     }
-    
-    
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension OnboardingContainerViewController: UIPageViewControllerDataSource {
+extension OnboardingContainerViewContainer: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return getPreviousViewController(from: viewController)
@@ -136,11 +125,11 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
-// MARK:- Action
-extension OnboardingContainerViewController {
+extension OnboardingContainerViewContainer {
     @objc func closeTapped() {
-       delegate?.didOnboardingFinish()
+        delegate?.didOnboardingFinish()
     }
 }
+
 
 

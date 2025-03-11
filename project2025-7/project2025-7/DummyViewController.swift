@@ -1,11 +1,16 @@
 //
-//  DummyViewController.swift
-//  project2025-6
+//  OnboardingViewController.swift
+//  project2025-7
 //
-//  Created by Laszlo Kovacs on 2025. 03. 10..
+//  Created by Laszlo Kovacs on 2025. 03. 11..
 //
+
 import Foundation
 import UIKit
+
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
 
 class DummyViewController: UIViewController {
     
@@ -13,7 +18,7 @@ class DummyViewController: UIViewController {
     let label = UILabel()
     let logoutButton = UIButton(type: .system)
     
-    weak var delegate: logoutDelegate?
+    weak var delegate: LogoutDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +32,8 @@ class DummyViewController: UIViewController {
 extension DummyViewController {
     
     func style() {
+        view.backgroundColor = .systemBackground
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -36,9 +43,11 @@ extension DummyViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.setTitle("Logout", for: [])
         logoutButton.configuration = .filled()
+        logoutButton.setTitle("Logout", for: [])
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .primaryActionTriggered)
+        
+        
     }
     
     func layout() {
@@ -57,7 +66,6 @@ extension DummyViewController {
 extension DummyViewController {
     
     @objc func logoutTapped() {
-        delegate?.logout()
+        delegate?.didLogout()
     }
 }
-

@@ -19,6 +19,14 @@ class LoginViewController: UIViewController {
     let signInButton = UIButton()
     let errorMessageLabel = UILabel()
     
+    var username: String? {
+        return loginView.usernameTextField.text
+    }
+    
+    var password: String? {
+        return loginView.passwordTextField.text
+    }
+    
     weak var delegate: LoginViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -106,7 +114,7 @@ extension LoginViewController {
         login()
     }
     func login() {
-        guard let username = usernameTextField.text, let password = passwordTextField.text else {
+        guard let username = username, let password = password else {
             assertionFailure("No username and password")
             return
         }

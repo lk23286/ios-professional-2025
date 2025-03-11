@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-       // window?.rootViewController = loginViewController
+        window?.rootViewController = loginViewController
        // window?.rootViewController = dummyViewController
-        window?.rootViewController = onboardingContainerViewController
+       // window?.rootViewController = onboardingContainerViewController
        // window?.rootViewController = OnboardingViewController(heroImageName: "delorean", textName: "delorean")
         
         return true

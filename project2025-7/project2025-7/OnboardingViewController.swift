@@ -1,8 +1,8 @@
 //
 //  OnboardingViewController.swift
-//  project2025-6
+//  project2025-7
 //
-//  Created by Laszlo Kovacs on 2025. 03. 09..
+//  Created by Laszlo Kovacs on 2025. 03. 11..
 //
 
 import Foundation
@@ -11,20 +11,17 @@ import UIKit
 class OnboardingViewController: UIViewController {
     
     let stackView = UIStackView()
+    let imageView = UIImageView()
     let label = UILabel()
-    let imageLabel = UIImageView()
     
-    let heroImageName: String
-    let textName: String
+    var heroImageName: String
+    var heroText: String
     
-    weak var delegate: OnboardingContainerViewControllerDelegate?
-    
-    
-   init(heroImageName: String, textName: String) {
+    init(heroImageName: String, heroText: String) {
         self.heroImageName = heroImageName
-        self.textName = textName
-       
-       super.init(nibName: nil, bundle: nil)
+        self.heroText = heroText
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -32,9 +29,13 @@ class OnboardingViewController: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+        
         
         style()
         layout()
@@ -45,26 +46,30 @@ class OnboardingViewController: UIViewController {
 extension OnboardingViewController {
     
     func style() {
-        view.backgroundColor = .systemBackground
         
+        view.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 20
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: heroImageName)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = textName
+        label.text = heroText
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
         label.numberOfLines = 0
         
-        imageLabel.translatesAutoresizingMaskIntoConstraints = false
-        imageLabel.image = UIImage(named: heroImageName)
-        imageLabel.contentMode = .scaleAspectFit
+        
+        
         
     }
     
+    
     func layout() {
-        stackView.addArrangedSubview(imageLabel)
+        stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(label)
         view.addSubview(stackView)
         
@@ -78,9 +83,3 @@ extension OnboardingViewController {
     }
 }
 
-extension OnboardingViewController {
-    @objc func closeTapped() {
-        print("Close tapped")
-        delegate?.didOnboardingFinish()
-    }
-}

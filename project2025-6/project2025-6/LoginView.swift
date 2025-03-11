@@ -23,15 +23,13 @@ class LoginView: UIView {
     required init(coder: NSCoder) {
         fatalError("Init (coder:) has not been implemented")
     }
-
-    
 }
 
 extension LoginView: UITextFieldDelegate {
     
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemGreen
+        backgroundColor = .secondarySystemBackground
         
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.placeholder = "Username"
@@ -40,12 +38,13 @@ extension LoginView: UITextFieldDelegate {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Password"
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 8
 
-        dividerView.backgroundColor = .systemRed
+        dividerView.backgroundColor = .systemGray
     }
     
     func layout() {

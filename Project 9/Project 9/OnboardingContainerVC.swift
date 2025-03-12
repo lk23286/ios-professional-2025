@@ -1,22 +1,21 @@
 //
-//  OnboardingContainerViewController.swift
-//  Project 8
+//  OnboardingContainerVC.swift
+//  Project 9
 //
 //  Created by Laszlo Kovacs on 2025. 03. 12..
 //
 
-
 import UIKit
 
-protocol OnboardingContainerViewControllerDelegate: AnyObject {
-    func didFinishOnboarding()
+protocol OnboardingContainerVCDelegate: AnyObject {
+    func didOnboarding()
 }
 
-protocol LogoutDelegate: AnyObject {
+protocol logoutDelegate: AnyObject {
     func didLogout()
 }
 
-class OnboardingContainerViewController: UIViewController {
+class OnboardingContainerVC: UIViewController {
     
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
@@ -24,17 +23,16 @@ class OnboardingContainerViewController: UIViewController {
         didSet {
         }
     }
+    let closeButton = UIButton(type:.system)
     
-    let closeButton = UIButton(type: .system)
-    
-    weak var delegate: OnboardingContainerViewControllerDelegate?
+    weak var delegate: OnboardingContainerVCDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewController(heroImageName: "delorean", heroText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
-        let page2 = OnboardingViewController(heroImageName: "world", heroText: "Move your money around the world quickly and easily.")
-        let page3 = OnboardingViewController(heroImageName: "thumbs", heroText: "Learn more at www.banky.com")
+        let page1 = OnboardingVC(heroImageName: "delorean", heroText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in 1989.")
+        let page2 = OnboardingVC(heroImageName: "world", heroText: "Move your money around the world quickly and easily.")
+        let page3 = OnboardingVC(heroImageName: "thumbs", heroText: "Learn more at www.banky.com")
         
         
         pages.append(page1)
@@ -52,14 +50,13 @@ class OnboardingContainerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
         setup()
         style()
         layout()
     }
-}
-
-extension OnboardingContainerViewController {
-    private func setup() {
+    
+    func setup() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemPurple
@@ -81,27 +78,28 @@ extension OnboardingContainerViewController {
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
     }
-    private func style() {
-        
+    
+    func style() {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setTitle("close", for: [])
         closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
         
+        
     }
     
-    private func layout() {
+    func layout() {
         view.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -2),
-            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8)
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2)
             ])
+
     }
-    
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension OnboardingContainerViewController: UIPageViewControllerDataSource {
+extension OnboardingContainerVC: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return getPreviousViewController(from: viewController)
@@ -132,11 +130,12 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
-
-
-extension OnboardingContainerViewController {
-    @objc func closeTapped() {
-        delegate?.didFinishOnboarding()
+extension OnboardingContainerVC {
+   @objc func closeTapped() {
+       delegate?.didOnboarding()
     }
 }
+
+
+
 

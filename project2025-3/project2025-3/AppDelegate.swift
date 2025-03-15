@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let onbordingContainerViewController = OnboardingContainerViewController()
     
     var window: UIWindow?
-    var hasOnboarding = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -38,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate:LoginViewControllerDelegate{
     func didLogin() {
-        if hasOnboarding {
+        if LocalState.hasOnboarding {
             window?.rootViewController = dummyViewController
         } else {
             window?.rootViewController = onbordingContainerViewController
@@ -56,7 +55,7 @@ extension AppDelegate:LogoutDelegate{
 extension AppDelegate: OnboardingContainerViewControllerDelegate{
     func didFinishOnbouarding() {
         window?.rootViewController = dummyViewController
-        hasOnboarding = true
+        LocalState.hasOnboarding = true
     }
 }
 

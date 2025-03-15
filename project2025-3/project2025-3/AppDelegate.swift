@@ -38,24 +38,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate:LoginViewControllerDelegate{
     func didLogin() {
         if LocalState.hasOnboarding {
-            window?.rootViewController = dummyViewController
+            //window?.rootViewController = dummyViewController
+            setRootViewController(dummyViewController)
         } else {
-            window?.rootViewController = onbordingContainerViewController
+            //window?.rootViewController = onbordingContainerViewController
+            setRootViewController(onbordingContainerViewController)
         }
     }
 }
 
 extension AppDelegate:LogoutDelegate{
     func didLogout() {
-        window?.rootViewController = loginViewController
-        loginViewController.signInButton.configuration?.showsActivityIndicator = false 
+        //window?.rootViewController = loginViewController
+        setRootViewController(loginViewController)
+        loginViewController.signInButton.configuration?.showsActivityIndicator = false
     }
 }
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate{
     func didFinishOnbouarding() {
-        window?.rootViewController = dummyViewController
+       // window?.rootViewController = dummyViewController
+        setRootViewController(dummyViewController)
         LocalState.hasOnboarding = true
     }
 }
 
+extension AppDelegate {
+    func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard animated, let window = self.window else {
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            return
+        }
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        UIView.transition(
+            with: window,
+            duration: 0.7,
+            options: .transitionCrossDissolve,
+            animations: nil,
+            completion: nil)
+        
+    }
+}

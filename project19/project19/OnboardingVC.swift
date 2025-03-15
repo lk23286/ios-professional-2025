@@ -1,20 +1,16 @@
 //
-//  DummyViewController.swift
-//  project2025-4
+//  OnboardingVC
+//  project19
 //
-//  Created by Laszlo Kovacs on 2025. 03. 08..
+//  Created by Laszlo Kovacs on 2025. 03. 14..
 //
 import Foundation
 import UIKit
 
-class DummyViewController: UIViewController {
+class StackViewContainer: UIViewController {
     
     let stackView = UIStackView()
     let label = UILabel()
-    let logoutButton = UIButton(type: .system)
-    
-    weak var delegate: LogoutDelegate?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +22,9 @@ class DummyViewController: UIViewController {
     
 }
 
-extension DummyViewController {
+extension StackViewContainer {
     
     func style() {
-        view.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -38,16 +33,10 @@ extension DummyViewController {
         label.text = "Hello, World!"
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        logoutButton.configuration = .filled()
-        logoutButton.setTitle("Logout", for: [])
-        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .primaryActionTriggered)
-        
     }
     
     func layout() {
         stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(logoutButton)
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -58,12 +47,4 @@ extension DummyViewController {
     }
 }
 
-extension DummyViewController {
-    @objc func logoutButtonTapped() {
-        //TODO
-        delegate?.didLogout()
-        
-    }
-
-}
 

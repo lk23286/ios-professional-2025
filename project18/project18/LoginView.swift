@@ -30,6 +30,7 @@ extension LoginView {
     func style() {
        
         translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .secondarySystemBackground
         
         usernameTextFiled.translatesAutoresizingMaskIntoConstraints = false
         usernameTextFiled.placeholder = "Username"
@@ -45,6 +46,8 @@ extension LoginView {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.backgroundColor = .secondarySystemBackground
+        
+        layer.cornerRadius = 8
     }
     
     func layout() {

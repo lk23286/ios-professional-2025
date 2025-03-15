@@ -12,13 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     var window: UIWindow?
+  
+    var hasOnboarding = false
     
     let loginViewController = LoginViewController()
     let onboardingContainerViewController = OnboardingContainerViewController()
     let dummyViewController = DummyViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+    
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
@@ -40,7 +42,11 @@ extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
         print("did Login")
         //window?.rootViewController = onboardingContainerViewController
-        setRootViewController(onboardingContainerViewController)
+        if hasOnboarding {
+            setRootViewController(dummyViewController)
+        } else {
+            setRootViewController(onboardingContainerViewController)
+        }
     }
 }
 
@@ -49,6 +55,7 @@ extension AppDelegate: OnboardingContainerViewControllerDelegate {
         print("foo-Did Finish Onboarding")
         //window?.rootViewController = dummyViewController
         setRootViewController(dummyViewController)
+        hasOnboarding = true
     }
 }
 

@@ -15,16 +15,28 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				OnboardingVC.swift,
 			);
 			target = 854E12CD2D81C5F200B30DFE /* project19 */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		854E13652D84E8CF00B30DFE /* Exceptions for "project19" folder in "Copy Bundle Resources" phase from "project19" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 854E12CC2D81C5F200B30DFE /* Resources */;
+			membershipExceptions = (
+				OnboardingVC.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		854E12D02D81C5F200B30DFE /* project19 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				854E12E02D81C5F400B30DFE /* Exceptions for "project19" folder in "project19" target */,
+				854E13652D84E8CF00B30DFE /* Exceptions for "project19" folder in "Copy Bundle Resources" phase from "project19" target */,
 			);
 			path = project19;
 			sourceTree = "<group>";

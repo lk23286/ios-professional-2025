@@ -11,6 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var hasOnboarding = false
     
     let loginViewController = LoginViewController()
     let onboardingContainerViewController = OnboardingContainerViewController()
@@ -35,9 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: LoginViewControllerDelegate {
-    func login() {
-        print("Do login")
-        window?.rootViewController = onboardingContainerViewController
+    func didLogin() {
+        if hasOnboarding {
+            window?.rootViewController = dummyViewController
+        } else {
+            window?.rootViewController = onboardingContainerViewController
+        }
     }
 }
 
@@ -52,6 +56,7 @@ extension AppDelegate: LogoutDelegate {
     func didLogout() {
         window?.rootViewController = loginViewController
         loginViewController.signInButton.configuration?.showsActivityIndicator = false
+        hasOnboarding = true
     }
     
     

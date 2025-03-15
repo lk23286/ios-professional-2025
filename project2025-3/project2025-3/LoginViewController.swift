@@ -12,7 +12,7 @@ protocol LogoutDelegate: AnyObject {
 }
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func login()
+    func didLogin()
 }
 
 class LoginViewController: UIViewController {
@@ -133,7 +133,7 @@ extension LoginViewController {
         
         if username == "Kevin" && password == "Welcome" {
             signInButton.configuration?.showsActivityIndicator = true
-            delegate?.login()
+            delegate?.didLogin()
         } else {
             configureView(withMessage: "Invalid username or password")
         }

@@ -40,9 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
-        print("did Login")
-        //window?.rootViewController = onboardingContainerViewController
-        if hasOnboarding {
+        if LocalState.hasOnboarding {
             setRootViewController(dummyViewController)
         } else {
             setRootViewController(onboardingContainerViewController)
@@ -52,17 +50,13 @@ extension AppDelegate: LoginViewControllerDelegate {
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        print("foo-Did Finish Onboarding")
-        //window?.rootViewController = dummyViewController
         setRootViewController(dummyViewController)
-        hasOnboarding = true
+        LocalState.hasOnboarding = true
     }
 }
 
 extension AppDelegate: LogoutDelegate {
     func didLogout() {
-        print("foo-Did Logout")
-        //window?.rootViewController = loginViewController
         setRootViewController(loginViewController)
         loginViewController.signInButton.configuration?.showsActivityIndicator = false
         

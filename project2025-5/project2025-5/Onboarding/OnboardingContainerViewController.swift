@@ -13,7 +13,7 @@ protocol OnboardingContainerViewControllerDelegate: AnyObject {
 }
 
 protocol logoutDelegate: AnyObject {
-    func logout()
+    func didLogout()
 }
 
 class OnboardingContainerViewController: UIViewController {

@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-
-
 class DummyViewController: UIViewController {
     
     let stackView = UIStackView()

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol logoutDelegate: AnyObject {
-    func logout()
+    func didLogout()
 }
 
 protocol OnboardingContainerViewControllerDelegate: AnyObject {
@@ -40,7 +40,6 @@ class OnboardingContainerViewController: UIViewController {
         pages.append(page2)
         pages.append(page3)
         
-        
         currentVC = pages.first!
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -56,9 +55,7 @@ class OnboardingContainerViewController: UIViewController {
         setup()
         style()
         layout()
-        
     }
-    
 }
 
 extension OnboardingContainerViewController {
@@ -100,8 +97,6 @@ extension OnboardingContainerViewController {
             closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
         ])
     }
-    
-    
 }
 
 // MARK: - UIPageViewControllerDataSource

@@ -9,8 +9,7 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
     var window: UIWindow?
     
     let loginViewController = LoginViewController()
@@ -34,12 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LoginViewControllerDelegate {
     func didLogin() {
-        window?.rootViewController = onboardingContainerVC
+        if LocalState.hasOnboarding {
+            setRootViewController(dummyVC)
+        } else {
+            setRootViewController(onboardingContainerVC)
+        }
     }
 }
 
 extension AppDelegate: OnboardingContainerVCDelegate {
     func didOnboarding() {
+        LocalState.hasOnboarding = true
         window?.rootViewController = dummyVC
     }
 }
@@ -47,10 +51,29 @@ extension AppDelegate: OnboardingContainerVCDelegate {
 extension AppDelegate: logoutDelegate {
     func didLogout() {
         loginViewController.signInButton.configuration?.showsActivityIndicator = false
-        window?.rootViewController = loginViewController
-        loginViewController.loginView.usernameTextField.text = ""
-        loginViewController.loginView.passwordTextField.text = ""
+        setRootViewController(loginViewController)
         
+       
+        
+        
+    }
+}
+
+extension AppDelegate {
+    func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard animated, let window = self.window else {
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            return
+        }
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        UIView.transition(
+            with: window,
+            duration: 0.7,
+            options: .transitionCrossDissolve,
+            animations: nil,
+            completion: nil)
         
     }
 }

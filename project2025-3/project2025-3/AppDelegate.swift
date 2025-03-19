@@ -4,6 +4,7 @@
 //
 //  Created by Laszlo Kovacs on 2025. 02. 07..
 //
+let appColor: UIColor = .systemTeal
 
 import UIKit
 
@@ -13,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let loginViewController = LoginViewController()
     let dummyViewController = DummyViewController()
     let onbordingContainerViewController = OnboardingContainerViewController()
+    let mainViewController = MainViewController()
     
     var window: UIWindow?
 
@@ -21,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        window?.rootViewController = loginViewController
+        //window?.rootViewController = loginViewController
         //window?.rootViewController = dummyViewController
+        window?.rootViewController = mainViewController
         
         loginViewController.delegate = self
         dummyViewController.delegate = self

@@ -8,24 +8,12 @@
 
 /* Begin PBXFileReference section */
 		8517B5DB2D4FFB980014BF29 /* Project2025.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2025.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525EE1B2D8736E000C764E6 /* Untitled 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Untitled 2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8517B5ED2D4FFB980014BF29 /* Exceptions for "Project2025" folder in "Project2025" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 8517B5DA2D4FFB980014BF29 /* Project2025 */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8517B5DD2D4FFB980014BF29 /* Project2025 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8517B5ED2D4FFB980014BF29 /* Exceptions for "Project2025" folder in "Project2025" target */,
-			);
 			path = Project2025;
 			sourceTree = "<group>";
 		};
@@ -45,6 +33,7 @@
 		8517B5D22D4FFB980014BF29 = {
 			isa = PBXGroup;
 			children = (
+				8525EE1B2D8736E000C764E6 /* Untitled 2.swift */,
 				8517B5DD2D4FFB980014BF29 /* Project2025 */,
 				8517B5DC2D4FFB980014BF29 /* Products */,
 			);

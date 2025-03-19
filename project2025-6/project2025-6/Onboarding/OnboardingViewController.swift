@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class OnboardingViewController: UIViewController {
-    
     let stackView = UIStackView()
     let label = UILabel()
     let imageLabel = UIImageView()
@@ -18,7 +17,6 @@ class OnboardingViewController: UIViewController {
     let textName: String
     
     weak var delegate: OnboardingContainerViewControllerDelegate?
-    
     
    init(heroImageName: String, textName: String) {
         self.heroImageName = heroImageName
@@ -31,19 +29,15 @@ class OnboardingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         style()
         layout()
     }
-    
 }
 
 extension OnboardingViewController {
-    
     func style() {
         view.backgroundColor = .systemBackground
         
@@ -60,7 +54,6 @@ extension OnboardingViewController {
         imageLabel.translatesAutoresizingMaskIntoConstraints = false
         imageLabel.image = UIImage(named: heroImageName)
         imageLabel.contentMode = .scaleAspectFit
-        
     }
     
     func layout() {
@@ -74,7 +67,6 @@ extension OnboardingViewController {
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 2)
         ])
-        
     }
 }
 

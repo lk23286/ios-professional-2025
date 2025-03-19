@@ -9,7 +9,7 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     let loginViewController = LoginViewController()
     let onboardingContainerViewController = OnboardingContainerViewController()
     let dummyViewController = DummyViewController()
@@ -28,29 +28,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dummyViewController.delegate = self
         
         
-       // window?.rootViewController = OnboardingViewController(heroImageName: "world", titleText: "hah")
-     //   window?.rootViewController = OnboardingContainerViewController()
+        // window?.rootViewController = OnboardingViewController(heroImageName: "world", titleText: "hah")
+        //   window?.rootViewController = OnboardingContainerViewController()
         return true
     }
 }
 
 extension AppDelegate: LoginViewControllerDelegate {
-    func login() {
-        print("Do Login")
-        window?.rootViewController = onboardingContainerViewController
+    func didLogin() {
+        if LocalState.hasOnboarding {
+            setRootViewController(dummyViewController)
+        } else {
+            setRootViewController(onboardingContainerViewController)
+        }
     }
 }
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        print("Did Finish Onboarding")
-        window?.rootViewController = dummyViewController
+        setRootViewController(dummyViewController)
+        LocalState.hasOnboarding = true
     }
 }
 extension AppDelegate: logoutDelegate {
-    func logout() {
-        print("Did Logout")
-        window?.rootViewController = loginViewController
+    func didLogout() {
+        setRootViewController(loginViewController)
         loginViewController.signInButton.configuration?.showsActivityIndicator = false
+    }
+}
+
+extension AppDelegate {
+    func setRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard animated, let window = self.window else {
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            return
+        }
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        UIView.transition(
+            with: window,
+            duration: 0.7,
+            options: .transitionCrossDissolve,
+            animations: nil,
+            completion: nil)
     }
 }

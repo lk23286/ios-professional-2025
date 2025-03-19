@@ -66,7 +66,7 @@ extension DummyViewController {
 
 extension DummyViewController {
     @objc func logoutTouched() {
-        delegate?.logout()
+        delegate?.didLogout()
     }
 }
 

@@ -7,15 +7,12 @@
 import Foundation
 import UIKit
 
-
-
 class LoginView: UIView {
     
     let usernameTextField = UITextField()
     let passwordTextField = UITextField()
     let stackView = UIStackView()
     let dividerView = UIView()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
